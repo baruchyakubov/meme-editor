@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,28 @@
     <title>meme editor</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-    <section class="gallery"></section>
-    <section class="editor"></section>
+
+<body onload="onInit()">
+    <section class="gallery">
+        <main class="images-container"></main>
+    </section>
+    <section class="editor closed">
+        <div class="canvas-container">
+            <canvas height="500" width="500" class="canvas"></canvas>
+        </div>
+        <div class="edit-container">
+            <h2>edit text line</h2>
+            write a line <input oninput="onSetLineTxt(this.value)" type="text">
+            pick a color: <input onchange="onSetColor(this.value)" type="color">
+            <button onclick="onIncreaseFontSize()">increase font</button>
+            <button onclick="onDecreaseFontSize()">decrease font</button>
+            <button onclick="onSetLineIdx()">switch line</button>
+        </div>
+    </section>
+    <!-- <img  src="" alt=""> -->
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/meme-service.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
