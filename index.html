@@ -19,15 +19,17 @@
                     <li><button>About</button></li>
                 </ul>
             </nav>
+            <button class="menu" onclick="showMenu()"><img src="img/menu.png" alt=""></button>
         </div>
     </header>
     <section class="gallery grid-container">
-        <div class=".filter grid-container flex">
-            <input class="search-box" type="search">
+        <div class=".filter grid-container flex-wrap justify-center">
+            <input class="search-box" type="search" placeholder="Search">
+            <div class="filter-by-category"></div>
         </div>
-        <main class="images-container "></main>
+        <main class="images-container flex-wrap justify-center grid-container"></main>
     </section>
-    <section class="editor closed">
+    <section class="editor grid-container flex-wrap closed">
         <div class="canvas-container">
             <canvas height="500" width="500" class="canvas"></canvas>
         </div>
