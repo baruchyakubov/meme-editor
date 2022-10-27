@@ -250,8 +250,9 @@ main {
 }
 
 .canvas-container {
-    height: 500px;
+    aspect-ratio: 1/1;
     width: 500px;
+    height: 500px;
 }
 
 
@@ -264,7 +265,7 @@ main {
 }
 
 @media (min-width:642px) {
-    
+
     .navigation-menu {
         position: static;
     }

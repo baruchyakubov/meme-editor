@@ -15,7 +15,7 @@ var gMeme = {
             size: 40,
             align: 'left',
             color: 'white',
-            posY: 60,
+            posY: 0,
             posX: 0
         },
 
@@ -24,7 +24,7 @@ var gMeme = {
             size: 40,
             align: 'left',
             color: 'white',
-            posY: 440,
+            posY: 0,
             posX: 0
         }
     ]

@@ -85,19 +85,22 @@ function showMeme(id) {
     gCtx = gElCanvas.getContext('2d')
     gMeme.lines[0].posX = gElCanvas.width / 2
     gMeme.lines[1].posX = gElCanvas.width / 2
+    gMeme.lines[0].posY = 60
+    gMeme.lines[1].posY =  gElCanvas.height -40
     resizeCanvas()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
-    renderMeme(imageUrl, lines)
     addEventListener()
-    // window.addEventListener('resize', () => {
+    renderMeme(imageUrl, lines)
+    //  window.addEventListener('resize', () => {
     //     resizeCanvas()
     //     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
     //   })
 }
 
 function resizeCanvas() {
+    console.log('hey');
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
