@@ -16,6 +16,7 @@
     src: url(../fonts/Poppins-Light.ttf);
 }
 
+
 /* HEALPERS */
 
 .flex {
@@ -84,6 +85,9 @@ body {
 }
 a{
     text-decoration: none;
+}
+canvas{
+    cursor: grab;
 }
 
 /* LAYOUT */

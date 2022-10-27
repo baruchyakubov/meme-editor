@@ -77,3 +77,20 @@ function setLineIdx() {
     if (gMeme.selectedLineIdx === 0) gMeme.selectedLineIdx = 1
     else gMeme.selectedLineIdx = 0
 }
+
+function isLineClicked(clickedPos) {
+    let isClicked = false
+    gMeme.lines.forEach((line,idx) => {
+        var lineWidth = gCtx.measureText(line.txt).width
+        if(clickedPos.x>line.posX - lineWidth / 2 && clickedPos.x<line.posX + lineWidth/2 
+        &&clickedPos.y<line.posY  &&clickedPos.y>line.posY-line.size){
+            if(idx !== gMeme.selectedLineIdx) onSetLineIdx()
+            isClicked = true
+        }  
+    })
+    if (!isClicked){
+        gIsTagged = false
+        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    } 
+    return isClicked
+  }
