@@ -12,7 +12,7 @@
 <body onload="onInit()">
     <header class="header">
         <div class=" grid-container flex space-between">
-            <h1 class="logo  flex align-center">LOGO</h1>
+            <h1 class="logo  flex align-center">MEME EDITOR</h1>
             <nav class="navigation-menu  flex justify-center align-center">
                 <ul class="clean-list flex">
                     <li><button>Gallery</button></li>
@@ -33,19 +33,31 @@
         <div class="canvas-container">
             <canvas height="500" width="500" class="canvas"></canvas>
         </div>
-        <div class="edit-container">
-            <h2>edit text line</h2>
-            write a line <input class="line" oninput="onSetLineTxt(this.value)" type="text">
-            pick a color: <input onchange="onSetColor(this.value)" type="color">
-            <button onclick="onIncreaseFontSize()">increase font</button>
-            <button onclick="onDecreaseFontSize()">decrease font</button>
-            <button onclick="onSetLineIdx()">switch line</button>
+        <div class="edit-container grid">
+
+            <input class="line" oninput="onSetLineTxt(this.value)" type="text">
+            <div class="change-txt flex-wrap justify-center align-center">
+                <button class="font-btn"><input style="cursor: pointer;" onchange="onSetColor(this.value)" type="color"></button>
+                <button class="font-btn" onclick="onIncreaseFontSize()"><img src="img/increase-font.png" alt=""></button>
+                <button class="font-btn" onclick="onDecreaseFontSize()"><img src="img/decrease-font.png" alt=""></button>
+                <button class="font-btn switch-line" onclick="onSetLineIdx()">
+                    <img src="img/switch-up.png" alt="">
+                    <img src="img/switch-down.png" alt="">
+                </button>
+            </div>
+            <div class="share-downlowd flex align-center space-around">
+                <button class="share-download download"> <a href="#" class="btn" onclick="onDownload(this)" download="my-img.jpg">Download</a></button>
+                <button class="share-download share" onclick="onShare()">Share to facebook</button>
+            </div>
+          
+           
         </div>
     </section>
     <!-- <img  src="" alt=""> -->
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/services/upload-service.js"></script>
 </body>
 
 </html>

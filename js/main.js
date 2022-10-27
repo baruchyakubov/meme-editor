@@ -1,7 +1,7 @@
 'use strict'
 let gElCanvas
 let gCtx
-
+let gIsUpload = false
 
 function onInit() {
     renderGallery()
@@ -43,7 +43,6 @@ function resizeCanvas() {
 function renderMeme(img, lines) {
     const elImg = new Image()
     elImg.src = img
-    // gCtx.beginPath()
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         lines.forEach((line, idx) => {
@@ -60,7 +59,7 @@ function drawText(line, idx) {
     gCtx.lineWidth = 2
     gCtx.font = `${line.size}px Arial`
     gCtx.textAlign = 'center'
-    if (gMeme.selectedLineIdx === idx) drawRect(line)
+    if (gMeme.selectedLineIdx === idx && !gIsUpload) drawRect(line)
     gCtx.fillStyle = line.color
     gCtx.strokeStyle = 'black'
     gCtx.fillText(line.txt, line.posX, line.posY)
@@ -106,6 +105,22 @@ function onSetLineIdx() {
 function showMenu() {
     if (document.querySelector('.navigation-menu').classList.contains('opened')) document.querySelector('.navigation-menu').classList.remove('opened')
     else document.querySelector('.navigation-menu').classList.add('opened')
+}
+
+function onDownload(elLink){
+    gIsUpload = true
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+    gIsUpload = false
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+function onShare(){
+    gIsUpload = true
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    uploadImg()
+    gIsUpload = false
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
 

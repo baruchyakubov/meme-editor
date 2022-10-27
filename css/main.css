@@ -7,6 +7,7 @@
     --clr5: #fefefe;
     --clr6: #383b42;
     --clr7: #22252c;
+    --clr8: #bbc4d1;
 }
 
 /* FONTS */
@@ -23,6 +24,10 @@
 
 .space-between {
     justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
 }
 
 .clean-list {
@@ -42,6 +47,10 @@
     flex-wrap: wrap;
 }
 
+.grid {
+    display: grid;
+}
+
 /* BASICS */
 body {
     background-color: var(--clr1);
@@ -49,12 +58,43 @@ body {
     overflow-x: hidden;
 }
 
+.font-btn{
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.switch-line{
+    background-color: rgb(109, 211, 148);
+}
+.share-download{
+    font-family: poppins-light;
+  border-radius: 30px;
+   cursor: pointer;
+   font-size: x-large;
+   color: var(--clr6);
+}
+.download{
+    padding: 24px; 
+    background-color: rgb(177, 136, 214);
+}
+.share{
+    padding: 20px;
+    background-color: rgb(128, 146, 226);
+}
+a{
+    text-decoration: none;
+}
+
 /* LAYOUT */
 .grid-container {
     max-width: 1300px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
+
 
 
 /* HEADER */
@@ -155,10 +195,7 @@ main {
 /* EDITOR */
 
 .editor {
-    /* display: flex; */
     justify-content: center;
-    /* height: 100%;
-    width: 100%; */
     margin-top: 20px;
 }
 
@@ -175,9 +212,32 @@ main {
 .edit-container {
     height: 450px;
     width: 450px;
-    background-color: rgb(214, 206, 206);
+    background-color: var(--clr6);
     border-radius: 10px;
     padding: 30px;
+    grid-template-columns: repeat(9 , 1fr);
+    grid-template-rows: repeat(9 , 1fr);
+}
+.line{
+    border-radius: 20px;
+    background-color: var(--clr5);
+    grid-column: 1 / 10; 
+    grid-row: 1;
+}
+
+.change-txt{
+    border-radius: 20px;
+    background-color: var(--clr3);
+    grid-column: 1 / 10;
+    grid-row: 3/6;
+}
+.change-txt>*{
+    margin: 10px;
+}
+
+.share-downlowd{
+    grid-column: 1 / 10; 
+    grid-row: 7/10;
 }
 
 .canvas {
@@ -190,6 +250,7 @@ main {
     width: 500px;
 }
 
+
 @media (min-width:460px) {
 
     .image {
@@ -199,6 +260,7 @@ main {
 }
 
 @media (min-width:642px) {
+    
     .navigation-menu {
         position: static;
     }
@@ -217,3 +279,4 @@ main {
         margin-right: 20px
     }
 }
+

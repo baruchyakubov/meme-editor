@@ -11,11 +11,11 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I sometimes eat Falafel',
+            txt: 'LOL',
             size: 40,
             align: 'left',
             color: 'white',
-            posY: 40,
+            posY: 60,
             posX: 0
         },
 
