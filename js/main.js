@@ -22,9 +22,12 @@ function showMeme(id) {
     document.querySelector('.editor').classList.remove('closed')
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
+    gMeme.lines[0].posX = gElCanvas.width/2
+    gMeme.lines[1].posX = gElCanvas.width/2
     resizeCanvas()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
+    document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     renderMeme(imageUrl, lines)
     // window.addEventListener('resize', () => {
     //     resizeCanvas()
@@ -44,23 +47,26 @@ function renderMeme(img, lines) {
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height) //img,x,y,xEnd,yEnd
         lines.forEach(line => {
-            drawText(line.txt, gElCanvas.width / 2, line.posY) 
+            drawText(line.txt, line.posX, line.posY , line.color , line.size) 
         })
         // drawText(line, gElCanvas.width / 2, 40)
         // drawText(line, gElCanvas.width / 2, 440)
     }
 }
 
-function drawText(text, x, y) {
+function drawText(text, x, y ,color , size) {
+    // gCtx.restore()
+    // gCtx.save()
     console.log(text);
     gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = getColor()
-    gCtx.font = `${getFontSize()}px Arial`
+    gCtx.fillStyle = color
+    gCtx.font = `${size}px Arial`
     gCtx.textAlign = 'center'
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    // gCtx.save()
 }
 
 function onSetLineTxt(text) {
@@ -86,6 +92,7 @@ function onDecreaseFontSize(){
 
 function onSetLineIdx(){
     setLineIdx()
+    document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 

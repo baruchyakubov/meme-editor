@@ -10,15 +10,17 @@ var gMeme = {
             size: 30,
             align: 'left',
             color: 'white',
-            posY:40
+            posY:40,
+            posX: 0
         },
 
         {
-            txt: 'I sometimes eat Falafel',
+            txt: 'hello there!',
             size: 30,
             align: 'left',
             color: 'white',
-            posY:440
+            posY:440,
+            posX: 0
         }
     ]
 }
@@ -33,7 +35,7 @@ function getMeme(id) {
 }
 
 function setLineTxt(text) {
-    gMeme.lines[0].txt = text
+    gMeme.lines[gMeme.selectedLineIdx].txt = text
 }
 
 function clearCanvas() {

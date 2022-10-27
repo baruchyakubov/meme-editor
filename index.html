@@ -10,8 +10,22 @@
 </head>
 
 <body onload="onInit()">
-    <section class="gallery">
-        <main class="images-container"></main>
+    <header class="header">
+        <div class=" grid-container flex space-between">
+            <h1 class="logo  flex align-center">LOGO</h1>
+            <nav class="navigation-menu  flex justify-center align-center">
+                <ul class="clean-list flex">
+                    <li><button>Gallery</button></li>
+                    <li><button>About</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="gallery grid-container">
+        <div class=".filter grid-container flex">
+            <input class="search-box" type="search">
+        </div>
+        <main class="images-container "></main>
     </section>
     <section class="editor closed">
         <div class="canvas-container">
@@ -19,7 +33,7 @@
         </div>
         <div class="edit-container">
             <h2>edit text line</h2>
-            write a line <input oninput="onSetLineTxt(this.value)" type="text">
+            write a line <input class="line" oninput="onSetLineTxt(this.value)" type="text">
             pick a color: <input onchange="onSetColor(this.value)" type="color">
             <button onclick="onIncreaseFontSize()">increase font</button>
             <button onclick="onDecreaseFontSize()">decrease font</button>
