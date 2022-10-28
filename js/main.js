@@ -14,8 +14,11 @@ function addListener() {
     addMouseListeners()
     addTouchListeners()
     window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+        if(screen.width === 643 || screen.width === 498){
+            resizeCanvas()
+            renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+        }
+    
       })
 }
 

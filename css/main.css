@@ -214,8 +214,8 @@ main {
 
 
 .edit-container {
-    height: 300px;
-    width: 300px;
+    height: 450px;
+    width: 450px;
     background-color: var(--clr6);
     border-radius: 10px;
     padding: 30px;
@@ -250,8 +250,8 @@ main {
 }
 
 .canvas-container {
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
 }
 
 
@@ -261,14 +261,14 @@ main {
         width: 170px;
         height: 170px;
     }
-    .canvas-container {
+    /* .canvas-container {
         width: 400px;
         height: 400px;
     }
     .edit-container{
         height: 350px;
         width: 350px;  
-    }
+    } */
 }
 
 @media (min-width:642px) {
@@ -287,14 +287,14 @@ main {
 }
 
 @media (min-width:772px) {
-    .canvas-container {
+    /* .canvas-container {
         width: 500px;
         height: 500px;
     }
     .edit-container{
         height: 450px;
         width: 450px;  
-    }
+    } */
     .search-box {
         margin-right: 20px
     }
