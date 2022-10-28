@@ -60,6 +60,7 @@ body {
 }
 
 .font-btn{
+    font-family: poppins-light;
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
@@ -76,13 +77,14 @@ body {
    color: var(--clr6);
 }
 .download{
-    padding: 24px; 
+    padding: 5px; 
     background-color: rgb(177, 136, 214);
 }
 .share{
-    padding: 20px;
+    padding: 5px;
     background-color: rgb(128, 146, 226);
 }
+
 a{
     text-decoration: none;
 }
@@ -233,15 +235,15 @@ main {
     border-radius: 20px;
     background-color: var(--clr3);
     grid-column: 1 / 10;
-    grid-row: 3/6;
+    grid-row: 3/8;
 }
 .change-txt>*{
-    margin: 10px;
+    margin: 7px;
 }
 
 .share-downlowd{
     grid-column: 1 / 10; 
-    grid-row: 7/10;
+    grid-row: 9/10;
 }
 
 .canvas {
@@ -254,21 +256,13 @@ main {
     height: 500px;
 }
 
-
+/* RESPONSIVE */
 @media (min-width:497px) {
 
     .image {
         width: 170px;
         height: 170px;
     }
-    /* .canvas-container {
-        width: 400px;
-        height: 400px;
-    }
-    .edit-container{
-        height: 350px;
-        width: 350px;  
-    } */
 }
 
 @media (min-width:642px) {
@@ -287,14 +281,6 @@ main {
 }
 
 @media (min-width:772px) {
-    /* .canvas-container {
-        width: 500px;
-        height: 500px;
-    }
-    .edit-container{
-        height: 450px;
-        width: 450px;  
-    } */
     .search-box {
         margin-right: 20px
     }

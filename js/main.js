@@ -13,13 +13,11 @@ function onInit() {
 function addListener() {
     addMouseListeners()
     addTouchListeners()
-    window.addEventListener('resize', () => {
-        if(screen.width === 643 || screen.width === 498){
-            resizeCanvas()
-            renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-        }
-    
-      })
+    // window.addEventListener('resize', () => {
+    //         resizeCanvas()
+    //         renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    //     }   
+    //   })
 }
 
 function addMouseListeners() {
@@ -103,11 +101,6 @@ function showMeme(id) {
 }
 
 function resizeCanvas() {
-    // console.log('hey');
-    gMeme.lines[0].posX = gElCanvas.width / 2
-    gMeme.lines[1].posX = gElCanvas.width / 2
-    gMeme.lines[0].posY = 60
-    gMeme.lines[1].posY =  gElCanvas.height -40
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
@@ -126,7 +119,7 @@ function renderMeme(img, lines) {
 function drawText(line, idx) {
     gCtx.beginPath()
     gCtx.lineWidth = 2
-    gCtx.font = `${line.size}px Arial`
+    gCtx.font = `${line.size}px ${line.font}`
     gCtx.textAlign = 'center'
     if (gMeme.selectedLineIdx === idx && gIsTagged === true) drawRect(line)
     gCtx.fillStyle = line.color
@@ -190,6 +183,21 @@ function onShare() {
     uploadImg()
     gIsUpload = false
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+
+function onSetFont(font){
+    setLineFont(font)
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+
+function onAddLine(){
+    addLine()
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+
+function onDeleteLine(){
+    deleteLine()
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines) 
 }
 
 

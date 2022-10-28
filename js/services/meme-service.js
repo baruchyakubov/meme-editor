@@ -16,7 +16,8 @@ var gMeme = {
             align: 'left',
             color: 'white',
             posY: 0,
-            posX: 0
+            posX: 0,
+            font: 'impact'
         },
 
         {
@@ -25,7 +26,8 @@ var gMeme = {
             align: 'left',
             color: 'white',
             posY: 0,
-            posX: 0
+            posX: 0,
+            font: 'impact'
         }
     ]
 }
@@ -74,8 +76,8 @@ function decreaseFontSize() {
 }
 
 function setLineIdx() {
-    if (gMeme.selectedLineIdx === 0) gMeme.selectedLineIdx = 1
-    else gMeme.selectedLineIdx = 0
+    if(gMeme.selectedLineIdx === gMeme.lines.length -1)gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx ++
 }
 
 function isLineClicked(clickedPos) {
@@ -84,7 +86,10 @@ function isLineClicked(clickedPos) {
         var lineWidth = gCtx.measureText(line.txt).width
         if (clickedPos.x > line.posX - lineWidth / 2 && clickedPos.x < line.posX + lineWidth / 2
             && clickedPos.y < line.posY && clickedPos.y > line.posY - line.size) {
-            if (idx !== gMeme.selectedLineIdx) onSetLineIdx()
+            if (idx !== gMeme.selectedLineIdx){
+                gMeme.selectedLineIdx = idx
+                renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+            } 
             isClicked = true
         }
     })
@@ -93,4 +98,28 @@ function isLineClicked(clickedPos) {
         renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
     }
     return isClicked
+}
+
+function setLineFont(font){
+    gMeme.lines[gMeme.selectedLineIdx].font = font
+}
+
+function addLine(){
+    gMeme.lines.push(createLine())
+}
+
+function deleteLine(){
+    gMeme.lines.splice(gMeme.selectedLineIdx , 1)
+}
+
+function createLine(){
+    return {
+        txt: 'LOL',
+        size: 40,
+        align: 'left',
+        color: 'white',
+        posY: gElCanvas.height/2,
+        posX: gElCanvas.width/2,
+        font: 'impact' 
+    }
 }
