@@ -164,7 +164,7 @@ canvas{
 
 .search-box {
     width: 350px;
-    height: 50px;
+    height: 70px;
     padding: 15px 25px;
     border-radius: 30px;
     background-color: var(--clr1);
@@ -175,9 +175,15 @@ canvas{
 
 .filter-by-category {
     background-color: var(--clr5);
-    width: 350px;
-    height: 50px;
+    padding: 5px;
     border-radius: 30px;
+}
+
+.filter-by-category>*{
+    background-color: var(--clr5);
+    border: 0px ;
+    font-family: poppins-light;
+    cursor: pointer;
 }
 
 main {

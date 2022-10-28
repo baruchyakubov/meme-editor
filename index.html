@@ -24,8 +24,14 @@
     </header>
     <section class="gallery grid-container">
         <div class=".filter grid-container flex-wrap justify-center">
-            <input class="search-box" type="search" placeholder="Search">
-            <div class="filter-by-category"></div>
+            <input oninput="onSetFilterByTxt(this.value)" class="search-box" type="search" placeholder="Search">
+            <div class="filter-by-category flex space-around align-center">
+                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="funny">FUNNY</button>
+                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="cute">CUTE</button>
+                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="aqward">AQWARD</button>
+                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="animal">ANIMAL</button>
+                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="bad">BAD</button>
+            </div>
         </div>
         <main class="images-container flex-wrap justify-center grid-container"></main>
     </section>
@@ -59,7 +65,6 @@
            
         </div>
     </section>
-    <!-- <img  src="" alt=""> -->
     <script src="js/services/storage-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/main.js"></script>

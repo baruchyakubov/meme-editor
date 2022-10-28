@@ -1,13 +1,22 @@
 'use strict'
 let gElCanvas
 let gCtx
-let gIsUpload = false
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 let gIsDrag = false
 let gIsTagged = true
 
 function onInit() {
+    var keywords = getKeyWordSizes()
+    setKeyWordSizes(keywords)
     renderGallery()
+}
+
+function setKeyWordSizes(keywords) {
+    if (keywords[0].size < 33) document.querySelector('.funny').style.fontSize = `${keywords[0].size}px`
+    if (keywords[1].size < 33) document.querySelector('.cute').style.fontSize = `${keywords[1].size}px`
+    if (keywords[2].size < 33) document.querySelector('.aqward').style.fontSize = `${keywords[2].size}px`
+    if (keywords[3].size < 33) document.querySelector('.animal').style.fontSize = `${keywords[3].size}px`
+    if (keywords[4].size < 33) document.querySelector('.bad').style.fontSize = `${keywords[4].size}px`
 }
 
 function addListener() {
@@ -60,7 +69,7 @@ function getEvPos(ev) {
     return pos
 }
 function onMove(ev) {
-    if(!gIsDrag) return
+    if (!gIsDrag) return
     const pos = getEvPos(ev)
     gMeme.lines[gMeme.selectedLineIdx].posX = pos.x
     gMeme.lines[gMeme.selectedLineIdx].posY = pos.y
@@ -91,13 +100,13 @@ function showMeme(id) {
     gMeme.lines[0].posX = gElCanvas.width / 2
     gMeme.lines[1].posX = gElCanvas.width / 2
     gMeme.lines[0].posY = 60
-    gMeme.lines[1].posY =  gElCanvas.height -40
+    gMeme.lines[1].posY = gElCanvas.height - 40
     resizeCanvas()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     renderMeme(imageUrl, lines)
-      addListener()
+    addListener()
 }
 
 function resizeCanvas() {
@@ -170,34 +179,43 @@ function showMenu() {
 }
 
 function onDownload(elLink) {
-    gIsUpload = true
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
-    gIsUpload = false
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-}
-function onShare() {
-    gIsUpload = true
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-    uploadImg()
-    gIsUpload = false
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onSetFont(font){
+function onShare() {
+    uploadImg()
+}
+
+function onSetFont(font) {
     setLineFont(font)
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onAddLine(){
+function onAddLine() {
     addLine()
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onDeleteLine(){
+function onDeleteLine() {
     deleteLine()
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines) 
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+
+function onSetFilterByClick(value) {
+    onChangeKeywordSize(value)
+    setFilterByClick(value)
+    renderGallery()
+}
+
+function onChangeKeywordSize(value) {
+    changeKeywordSize(value)
+    setKeyWordSizes(gKeyWords)
+}
+
+function onSetFilterByTxt(value){
+    setFilterByTxt(value)
+    renderGallery()
 }
 
 
