@@ -87,10 +87,10 @@ function showMeme(id) {
     document.querySelector('.editor').classList.remove('closed')
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    // gMeme.lines[0].posX = gElCanvas.width / 2
-    // gMeme.lines[1].posX = gElCanvas.width / 2
-    // gMeme.lines[0].posY = 60
-    // gMeme.lines[1].posY =  gElCanvas.height -40
+    gMeme.lines[0].posX = gElCanvas.width / 2
+    gMeme.lines[1].posX = gElCanvas.width / 2
+    gMeme.lines[0].posY = 60
+    gMeme.lines[1].posY =  gElCanvas.height -40
     resizeCanvas()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
