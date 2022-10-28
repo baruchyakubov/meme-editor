@@ -10,9 +10,13 @@ function onInit() {
     renderGallery()
 }
 
-function addEventListener() {
+function addListener() {
     addMouseListeners()
     addTouchListeners()
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+      })
 }
 
 function addMouseListeners() {
@@ -83,24 +87,24 @@ function showMeme(id) {
     document.querySelector('.editor').classList.remove('closed')
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    gMeme.lines[0].posX = gElCanvas.width / 2
-    gMeme.lines[1].posX = gElCanvas.width / 2
-    gMeme.lines[0].posY = 60
-    gMeme.lines[1].posY =  gElCanvas.height -40
+    // gMeme.lines[0].posX = gElCanvas.width / 2
+    // gMeme.lines[1].posX = gElCanvas.width / 2
+    // gMeme.lines[0].posY = 60
+    // gMeme.lines[1].posY =  gElCanvas.height -40
     resizeCanvas()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
-    addEventListener()
     renderMeme(imageUrl, lines)
-    //  window.addEventListener('resize', () => {
-    //     resizeCanvas()
-    //     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-    //   })
+      addListener()
 }
 
 function resizeCanvas() {
-    console.log('hey');
+    // console.log('hey');
+    gMeme.lines[0].posX = gElCanvas.width / 2
+    gMeme.lines[1].posX = gElCanvas.width / 2
+    gMeme.lines[0].posY = 60
+    gMeme.lines[1].posY =  gElCanvas.height -40
     const elContainer = document.querySelector('.canvas-container')
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
