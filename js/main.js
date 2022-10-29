@@ -23,10 +23,10 @@ function addListener() {
     addMouseListeners()
     addTouchListeners()
     window.addEventListener('resize', () => {
+        if(window.innerWidth <= 941) return
         setFirstLinesPos()
-        resizeCanvas()  
+        resizeCanvas()
         renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-        
     })
 }
 
@@ -99,8 +99,8 @@ function showMeme(id) {
     document.querySelector('.editor').classList.remove('closed')
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    setFirstLinesPos()
     resizeCanvas()
+    setFirstLinesPos()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
