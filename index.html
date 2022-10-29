@@ -12,11 +12,11 @@
 <body onload="onInit()">
     <header class="header">
         <div class=" grid-container flex space-between">
-            <h1 class="logo  flex align-center">MEME EDITOR</h1>
+            <h1 data-trans="logo" class="logo  flex align-center">MEME EDITOR</h1>
             <nav class="navigation-menu  flex justify-center align-center">
                 <ul class="clean-list flex">
-                    <li><button>Gallery</button></li>
-                    <li><button>About</button></li>
+                    <li><button onclick="onReturnToGallery(this)" class="Gallery clicked" data-trans="gallery">Gallery</button></li>
+                    <li><button data-trans="about">About</button></li>
                 </ul>
             </nav>
             <button class="menu" onclick="showMenu()"><img src="img/menu.png" alt=""></button>
@@ -24,13 +24,17 @@
     </header>
     <section class="gallery grid-container">
         <div class=".filter grid-container flex-wrap justify-center">
-            <input oninput="onSetFilterByTxt(this.value)" class="search-box" type="search" placeholder="Search">
+            <select class="lan" onchange="onSetLang(this.value)">
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+            </select>
+            <input data-trans="search" oninput="onSetFilterByTxt(this.value)" class="search-box" type="search" placeholder="Search">
             <div class="filter-by-category flex-wrap space-around align-center">
-                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="funny">FUNNY</button>
-                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="cute">CUTE</button>
-                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="aqward">AQWARD</button>
-                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="animal">ANIMAL</button>
-                <button onclick="onSetFilterByClick(this.innerText.toLowerCase())" class="bad">BAD</button>
+                <button data-trans="funny" value="funny" onclick="onSetFilterByClick(this)" class="funny">FUNNY</button>
+                <button data-trans="cute" value="cute" onclick="onSetFilterByClick(this)" class="cute">CUTE</button>
+                <button data-trans="aqward" value="aqward" onclick="onSetFilterByClick(this)" class="aqward">AQWARD</button>
+                <button data-trans="animal" value="animal" onclick="onSetFilterByClick(this)" class="animal">ANIMALS</button>
+                <button data-trans="bad" value="bad" onclick="onSetFilterByClick(this)" class="bad">BAD</button>
             </div>
         </div>
         <main class="images-container flex-wrap justify-center grid-container"></main>
@@ -58,14 +62,15 @@
                 <img class="font-btn" onclick="onDeleteLine()" src="img/delete-line.png" alt="">
             </div>
             <div class="share-downlowd flex-wrap align-center space-around">
-                <button class="share-download download"> <a href="#" class="btn" onclick="onDownload(this)" download="my-img.jpg">Download</a></button>
-                <button class="share-download share" onclick="onShare()">Share to facebook</button>
+                <button data-trans="download" class="share-download download"> <a href="#" class="btn" onclick="onDownload(this)" download="my-img.jpg">Download</a></button>
+                <button data-trans="share" class="share-download share" onclick="onShare()">Share to facebook</button>
             </div>
           
            
         </div>
     </section>
     <script src="js/services/storage-service.js"></script>
+    <script src="js/services/i18n-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/services/upload-service.js"></script>

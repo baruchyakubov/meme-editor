@@ -16,7 +16,6 @@
     src: url(../fonts/Poppins-Light.ttf);
 }
 
-
 /* HEALPERS */
 
 .flex {
@@ -53,6 +52,9 @@
 }
 
 /* BASICS */
+body.rtl {
+    direction: rtl;
+}
 
 body {
     background-color: var(--clr1);
@@ -130,8 +132,14 @@ canvas {
     position: absolute;
     left: 150%;
     top: 7%;
-    transition: ease-in 0.2s;
 }
+
+.navigation-menu.opened.rtl {
+    left: 0%;
+    transform: translate(0%);
+}
+
+
 
 .opened {
     left: 100%;
@@ -156,6 +164,11 @@ canvas {
     cursor: pointer;
 }
 
+.clicked {
+    background-color: var(--clr5) !important;
+    color: var(--clr2) !important;
+}
+
 .navigation-menu ul li button:hover {
     background-color: var(--clr5);
     color: var(--clr2);
@@ -177,6 +190,12 @@ canvas {
     margin-bottom: 20px;
 }
 
+.lan {
+    margin-inline-end: 20px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+}
+
 .filter-by-category {
     background-color: var(--clr5);
     padding: 5px;
@@ -186,6 +205,7 @@ canvas {
 .filter-by-category>* {
     background-color: var(--clr5);
     border: 0px;
+    border-radius: 30px;
     font-family: poppins-light;
     cursor: pointer;
 }
@@ -226,11 +246,9 @@ main {
     display: none;
 }
 
-
-
 .edit-container {
-    height: 400px;
-    width: 400px;
+    height: 350px;
+    width: 350px;
     background-color: var(--clr6);
     border-radius: 10px;
     padding: 30px;
@@ -275,7 +293,6 @@ main {
 
 /* RESPONSIVE */
 @media (min-width:497px) {
-
     .image {
         width: 170px;
         height: 170px;
@@ -283,7 +300,6 @@ main {
 }
 
 @media (min-width:642px) {
-
     .navigation-menu {
         position: static;
     }
@@ -299,7 +315,7 @@ main {
 
 @media (min-width:772px) {
     .search-box {
-        margin-right: 20px
+        margin-inline-end: 20px
     }
 }
 
@@ -308,7 +324,13 @@ main {
         width: 40%;
         height: fit-content;
     }
-    .editor{
+
+    .editor {
         flex-direction: row;
+    }
+
+    .edit-container {
+        height: 460px;
+        width: 460px;
     }
 }

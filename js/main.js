@@ -109,10 +109,15 @@ function renderGallery() {
 }
 
 
-
+function onReturnToGallery(elGallery){
+    elGallery.classList.add('clicked')
+    document.querySelector('.gallery').classList.remove('closed')
+    document.querySelector('.editor').classList.add('closed')
+}
 
 
 function showMeme(id) {
+    document.querySelector('.Gallery').classList.remove('clicked')
     document.querySelector('.gallery').classList.add('closed')
     document.querySelector('.editor').classList.remove('closed')
     gElCanvas = document.querySelector('canvas')
@@ -152,7 +157,7 @@ function renderMeme(img, lines) {
 function drawText(line, idx) {
     gCtx.beginPath()
     gCtx.lineWidth = 2
-    gCtx.font = `${line.size}px ${line.font}`
+    gCtx.font = `${line.size}px ${line.font}` 
     gCtx.textAlign = 'center'
     if (gMeme.selectedLineIdx === idx && gIsTagged === true) drawRect(line)
     gCtx.fillStyle = line.color
@@ -172,7 +177,7 @@ function drawRect(line) {
 }
 
 function drawArc(x, y) {
-    gMeme.lines[gMeme.selectedLineIdx].posArc = {x , y:y+10}
+    gMeme.lines[gMeme.selectedLineIdx].posArc = { x, y: y + 10 }
     gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.arc(x, y + 10, 5, 0, 2 * Math.PI)
@@ -239,7 +244,8 @@ function onDeleteLine() {
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onSetFilterByClick(value) {
+function onSetFilterByClick(elKeyWord) {
+    var value = elKeyWord.value 
     onChangeKeywordSize(value)
     setFilterByClick(value)
     renderGallery()
@@ -253,6 +259,23 @@ function onChangeKeywordSize(value) {
 function onSetFilterByTxt(value) {
     setFilterByTxt(value)
     renderGallery()
+}
+
+function onSetLang(lang) {
+    setLang(lang)
+    setDirection(lang)
+    doTrans()
+}
+
+function setDirection(lang) {
+    if (lang === 'he'){
+        document.body.classList.add('rtl')
+        document.querySelector('.navigation-menu').classList.add('rtl')
+    } 
+    else{
+        document.body.classList.remove('rtl')
+        document.querySelector('.navigation-menu').classList.remove('rtl')
+    }
 }
 
 
