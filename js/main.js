@@ -11,6 +11,7 @@ function onInit() {
     var keywords = getKeyWordSizes()
     setKeyWordSizes(keywords)
     var lang = getLang()
+    document.querySelector('.lan').value = lang
     onSetLang(lang)
     renderGallery()
 }
