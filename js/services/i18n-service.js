@@ -5,7 +5,7 @@ const gTrans = {
         he: 'עורך מימס'
     },
     'gallery': {
-        en: 'Gaellry',
+        en: 'Gallery',
         he: 'גלריה'
     },
     'about': {
