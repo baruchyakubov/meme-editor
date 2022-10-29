@@ -19,7 +19,8 @@ var gMeme = {
             color: 'white',
             posY: 0,
             posX: 0,
-            font: 'impact'
+            font: 'impact',
+            posArc:{}
         },
 
         {
@@ -29,12 +30,14 @@ var gMeme = {
             color: 'white',
             posY: 0,
             posX: 0,
-            font: 'impact'
+            font: 'impact',
+            posArc:{}
         }
     ]
 }
 var gFilterBy = gImgs
 var gMemeImg
+var gIsArcClicked = false
 
 function getKeyWordSizes() {
     var keyWords = loadFromStorage('keywords')
@@ -105,7 +108,14 @@ function isLineClicked(clickedPos) {
                 renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
             }
             isClicked = true
+        } else {
+            const distance = Math.sqrt((line.posArc.x - clickedPos.x) ** 2 + (line.posArc.y- clickedPos.y) ** 2)
+            if (distance <= 5 && idx === gMeme.selectedLineIdx){
+                gIsArcClicked = true
+                isClicked = true
+            }
         }
+
     })
     if (!isClicked) {
         gIsTagged = false
@@ -153,9 +163,9 @@ function changeKeywordSize(value) {
 }
 
 function setFilterByTxt(value) {
-    if(value === ''){
+    if (value === '') {
         gFilterBy = gImgs
-        return  
+        return
     }
     gFilterBy = []
     gImgs.forEach(image => {

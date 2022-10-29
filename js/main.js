@@ -4,6 +4,8 @@ let gCtx
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 let gIsDrag = false
 let gIsTagged = true
+let gIsCircleDrag = false
+let gStartPos
 
 function onInit() {
     var keywords = getKeyWordSizes()
@@ -23,7 +25,7 @@ function addListener() {
     addMouseListeners()
     addTouchListeners()
     window.addEventListener('resize', () => {
-        if(window.innerWidth < 941) return
+        if (window.innerWidth < 941) return
         resizeCanvas()
         setFirstLinesPos()
         renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
@@ -45,9 +47,14 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-    console.log('Im from onDown')
     const pos = getEvPos(ev)
     if (!isLineClicked(pos)) return
+    if (gIsArcClicked) {
+        gIsCircleDrag = true
+        document.querySelector('canvas').style.cursor = 'grabbing'
+        gStartPos = pos
+        return
+    }
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     gIsTagged = true
     gIsDrag = true
@@ -71,13 +78,24 @@ function getEvPos(ev) {
     return pos
 }
 function onMove(ev) {
-    if (!gIsDrag) return
+    if (!gIsDrag && !gIsCircleDrag) return
     const pos = getEvPos(ev)
+    if (gIsCircleDrag) {
+        if (pos.x > gStartPos.x && gMeme.lines[gMeme.selectedLineIdx].size < 80) {
+            gMeme.lines[gMeme.selectedLineIdx].size += 10
+        } else if (pos.x < gStartPos.x && gMeme.lines[gMeme.selectedLineIdx].size > 20) {
+            gMeme.lines[gMeme.selectedLineIdx].size -= 10
+        }
+        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+        return
+    }
     gMeme.lines[gMeme.selectedLineIdx].posX = pos.x
     gMeme.lines[gMeme.selectedLineIdx].posY = pos.y
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 function onUp() {
+    gIsArcClicked = false
+    gIsCircleDrag = false
     gIsDrag = false
     document.querySelector('canvas').style.cursor = 'grab'
 }
@@ -150,7 +168,20 @@ function drawRect(line) {
     gCtx.strokeRect(line.posX - lineWidth / 2, line.posY - line.size, lineWidth, line.size + 10)
     gCtx.fillStyle = 'rgba(0,0,200,0)'
     gCtx.fillRect(line.posX - lineWidth / 2, line.posY - line.size, lineWidth, line.size + 10)
+    drawArc(line.posX + lineWidth / 2, line.posY)
 }
+
+function drawArc(x, y) {
+    gMeme.lines[gMeme.selectedLineIdx].posArc = {x , y:y+10}
+    gCtx.beginPath()
+    gCtx.lineWidth = 2
+    gCtx.arc(x, y + 10, 5, 0, 2 * Math.PI)
+    gCtx.strokeStyle = 'white'
+    gCtx.stroke()
+    gCtx.fillStyle = 'yellow'
+    gCtx.fill()
+}
+
 
 function onSetLineTxt(text) {
     setLineTxt(text)
