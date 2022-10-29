@@ -53,7 +53,7 @@ function getKeyWordSizes() {
     if (!keyWords) {
         keyWords = [{ value: 'funny', size: 18 }, { value: 'cute', size: 18 }, { value: 'aqward', size: 18 }, { value: 'animal', size: 18 }, { value: 'bad', size: 18 }]
         console.log(gKeyWords);
-        saveToStorage('keywords', gKeyWords)
+        saveToStorage('keywords', keyWords)
     }
     gKeyWords = keyWords
     return gKeyWords
