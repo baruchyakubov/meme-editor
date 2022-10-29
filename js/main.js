@@ -23,7 +23,7 @@ function addListener() {
     addMouseListeners()
     addTouchListeners()
     window.addEventListener('resize', () => {
-        // if(window.innerWidth <= 941) return
+        if(window.innerWidth <= 941) return
         setFirstLinesPos()
         resizeCanvas()
         renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
