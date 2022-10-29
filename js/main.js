@@ -10,6 +10,8 @@ let gStartPos
 function onInit() {
     var keywords = getKeyWordSizes()
     setKeyWordSizes(keywords)
+    var lang = getLang()
+    onSetLang(lang)
     renderGallery()
 }
 

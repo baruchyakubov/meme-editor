@@ -46,7 +46,7 @@ const gTrans = {
     }
 }
 
-let gCurrLang = 'en'
+let gCurrLang
 
 function getTrans(transKey) {
     const transMap = gTrans[transKey]
@@ -69,4 +69,5 @@ function doTrans() {
 
 function setLang(lang) {
     gCurrLang = lang
+    saveToStorage('language' , gCurrLang)
 }

@@ -10,6 +10,13 @@
 </head>
 
 <body onload="onInit()">
+    <datalist id="keywords">
+        <option data-trans="funny" value="funny">funny</option>
+        <option data-trans="cute" value="cute">cute</option>
+        <option data-trans="aqward" value="aqward">aqward</option>
+        <option data-trans="animals" value="animals">animals</option>
+        <option data-trans="bad" value="bad">bad</option>
+    </datalist>
     <header class="header">
         <div class=" grid-container flex space-between">
             <h1 data-trans="logo" class="logo  flex align-center">MEME EDITOR</h1>
@@ -28,7 +35,7 @@
                 <option value="en">English</option>
                 <option value="he">עברית</option>
             </select>
-            <input data-trans="search" oninput="onSetFilterByTxt(this.value)" class="search-box" type="search" placeholder="Search">
+            <input list="keywords" data-trans="search" oninput="onSetFilterByTxt(this.value.toLowerCase())" class="search-box" type="search" placeholder="Search">
             <div class="filter-by-category flex-wrap space-around align-center">
                 <button data-trans="funny" value="funny" onclick="onSetFilterByClick(this)" class="funny">FUNNY</button>
                 <button data-trans="cute" value="cute" onclick="onSetFilterByClick(this)" class="cute">CUTE</button>

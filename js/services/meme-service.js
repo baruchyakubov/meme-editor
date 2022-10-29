@@ -39,6 +39,16 @@ var gFilterBy = gImgs
 var gMemeImg
 var gIsArcClicked = false
 
+function getLang(){
+    var lang = loadFromStorage('language')
+    if(!lang){
+        lang = 'en'
+        saveToStorage('language' , lang)
+    }
+    gCurrLang = lang
+    return lang
+}
+
 function getKeyWordSizes() {
     var keyWords = loadFromStorage('keywords')
     if (!keyWords) {
