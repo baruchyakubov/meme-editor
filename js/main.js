@@ -202,11 +202,13 @@ function onSetColor(color) {
 }
 
 function onIncreaseFontSize() {
+    if(gMeme.lines[gMeme.selectedLineIdx].size > 80) return 
     increaseFontSize()
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
 function onDecreaseFontSize() {
+    if(gMeme.lines[gMeme.selectedLineIdx].size < 20) return 
     decreaseFontSize()
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
