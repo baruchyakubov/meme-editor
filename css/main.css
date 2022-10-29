@@ -60,36 +60,40 @@ body {
     overflow-x: hidden;
 }
 
-.font-btn{
+.font-btn {
     font-family: poppins-light;
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.switch-line{
+.switch-line {
     background-color: rgb(109, 211, 148);
 }
-.share-download{
+
+.share-download {
     font-family: poppins-light;
-  border-radius: 30px;
-   cursor: pointer;
-   font-size: x-large;
-   color: var(--clr6);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: x-large;
+    color: var(--clr6);
 }
-.download{
-    padding: 5px; 
+
+.download {
+    padding: 5px;
     background-color: rgb(177, 136, 214);
 }
-.share{
+
+.share {
     padding: 5px;
     background-color: rgb(128, 146, 226);
 }
 
-a{
+a {
     text-decoration: none;
 }
-canvas{
+
+canvas {
     cursor: grab;
 }
 
@@ -179,9 +183,9 @@ canvas{
     border-radius: 30px;
 }
 
-.filter-by-category>*{
+.filter-by-category>* {
     background-color: var(--clr5);
-    border: 0px ;
+    border: 0px;
     font-family: poppins-light;
     cursor: pointer;
 }
@@ -209,7 +213,10 @@ main {
 
 .editor {
     justify-content: center;
+    justify-items: center;
+    align-items: center;
     margin-top: 20px;
+    flex-direction: column;
 }
 
 .editor>* {
@@ -223,33 +230,35 @@ main {
 
 
 .edit-container {
-    height: 450px;
-    width: 450px;
+    height: 400px;
+    width: 400px;
     background-color: var(--clr6);
     border-radius: 10px;
     padding: 30px;
-    grid-template-columns: repeat(9 , 1fr);
-    grid-template-rows: repeat(9 , 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
 }
-.line{
+
+.line {
     border-radius: 20px;
     background-color: var(--clr5);
-    grid-column: 1 / 10; 
+    grid-column: 1 / 10;
     grid-row: 1;
 }
 
-.change-txt{
+.change-txt {
     border-radius: 20px;
     background-color: var(--clr3);
     grid-column: 1 / 10;
     grid-row: 3/8;
 }
-.change-txt>*{
+
+.change-txt>* {
     margin: 7px;
 }
 
-.share-downlowd{
-    grid-column: 1 / 10; 
+.share-downlowd {
+    grid-column: 1 / 10;
     grid-row: 9/10;
 }
 
@@ -259,8 +268,7 @@ main {
 }
 
 .canvas-container {
-    width: 500px;
-    height: 500px;
+    display: flex;
 }
 
 /* RESPONSIVE */
@@ -273,7 +281,7 @@ main {
 }
 
 @media (min-width:642px) {
-  
+
     .navigation-menu {
         position: static;
     }
@@ -293,3 +301,12 @@ main {
     }
 }
 
+@media (min-width:941px) {
+    .canvas-container {
+        width: 40%;
+        aspect-ratio: 1/1;
+    }
+    .editor{
+        flex-direction: row;
+    }
+}

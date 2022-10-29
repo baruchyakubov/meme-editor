@@ -22,11 +22,12 @@ function setKeyWordSizes(keywords) {
 function addListener() {
     addMouseListeners()
     addTouchListeners()
-    // window.addEventListener('resize', () => {
-    //         resizeCanvas()
-    //         renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-    //     }   
-    //   })
+    window.addEventListener('resize', () => {
+        if(window.innerWidth <= 941) return
+        setFirstLinesPos()
+            resizeCanvas()
+            renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)   
+      })
 }
 
 function addMouseListeners() {
@@ -47,6 +48,7 @@ function onDown(ev) {
     console.log('Im from onDown')
     const pos = getEvPos(ev)
     if (!isLineClicked(pos)) return
+    document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     gIsTagged = true
     gIsDrag = true
     document.querySelector('canvas').style.cursor = 'grabbing'
@@ -97,16 +99,20 @@ function showMeme(id) {
     document.querySelector('.editor').classList.remove('closed')
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    gMeme.lines[0].posX = gElCanvas.width / 2
-    gMeme.lines[1].posX = gElCanvas.width / 2
-    gMeme.lines[0].posY = 60
-    gMeme.lines[1].posY = gElCanvas.height - 40
+    setFirstLinesPos()
     resizeCanvas()
     var imageUrl = getMeme(id).img
     var lines = getMeme(id).lines
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     renderMeme(imageUrl, lines)
     addListener()
+}
+
+function setFirstLinesPos(){
+    gMeme.lines[0].posX = gElCanvas.width / 2
+    gMeme.lines[1].posX = gElCanvas.width / 2
+    gMeme.lines[0].posY = gElCanvas.height/9
+    gMeme.lines[1].posY = gElCanvas.height-gElCanvas.height/10
 }
 
 function resizeCanvas() {
