@@ -23,11 +23,11 @@ function addListener() {
     addMouseListeners()
     addTouchListeners()
     window.addEventListener('resize', () => {
-        if(window.innerWidth <= 941) return
+        // if(window.innerWidth <= 941) return
         setFirstLinesPos()
-            resizeCanvas()
-            renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)   
-      })
+        resizeCanvas()
+        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    })
 }
 
 function addMouseListeners() {
@@ -108,11 +108,11 @@ function showMeme(id) {
     addListener()
 }
 
-function setFirstLinesPos(){
+function setFirstLinesPos() {
     gMeme.lines[0].posX = gElCanvas.width / 2
     gMeme.lines[1].posX = gElCanvas.width / 2
-    gMeme.lines[0].posY = gElCanvas.height/9
-    gMeme.lines[1].posY = gElCanvas.height-gElCanvas.height/10
+    gMeme.lines[0].posY = gElCanvas.height / 9
+    gMeme.lines[1].posY = gElCanvas.height - gElCanvas.height / 10
 }
 
 function resizeCanvas() {
@@ -219,7 +219,7 @@ function onChangeKeywordSize(value) {
     setKeyWordSizes(gKeyWords)
 }
 
-function onSetFilterByTxt(value){
+function onSetFilterByTxt(value) {
     setFilterByTxt(value)
     renderGallery()
 }

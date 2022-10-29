@@ -213,7 +213,6 @@ main {
 
 .editor {
     justify-content: center;
-    justify-items: center;
     align-items: center;
     margin-top: 20px;
     flex-direction: column;
@@ -269,6 +268,9 @@ main {
 
 .canvas-container {
     display: flex;
+    width: 355px;
+    height: 355px;
+    aspect-ratio: 1/1;
 }
 
 /* RESPONSIVE */
@@ -304,7 +306,7 @@ main {
 @media (min-width:941px) {
     .canvas-container {
         width: 40%;
-        aspect-ratio: 1/1;
+        height: fit-content;
     }
     .editor{
         flex-direction: row;
