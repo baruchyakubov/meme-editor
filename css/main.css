@@ -53,8 +53,11 @@
 
 /* BASICS */
 
-body.rtl {
+body.rtl  {
     direction: rtl;
+}
+.editor , .edit-container{
+    direction: ltr !important;
 }
 
 body {
