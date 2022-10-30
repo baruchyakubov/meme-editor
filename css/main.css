@@ -79,7 +79,7 @@ body {
 }
 
 
-.font-btn :not(.font-style , .font-color) img{
+.font-btn :not(.font-style) img{
     height: 100%;
     width: 100%;
 }
