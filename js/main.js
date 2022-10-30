@@ -6,6 +6,7 @@ let gIsDrag = false
 let gIsTagged = true
 let gIsCircleDrag = false
 let gStartPos
+let gIsUpload = false
 
 function onInit() {
     var keywords = getKeyWordSizes()
@@ -163,7 +164,7 @@ function drawText(line, idx) {
     gCtx.lineWidth = 2
     gCtx.font = `${line.size}px ${line.font}` 
     gCtx.textAlign = 'center'
-    if (gMeme.selectedLineIdx === idx && gIsTagged === true) drawRect(line)
+    if (gMeme.selectedLineIdx === idx && gIsTagged === true && !gIsUpload) drawRect(line)
     gCtx.fillStyle = line.color
     gCtx.strokeStyle = 'black'
     gCtx.fillText(line.txt, line.posX, line.posY)
@@ -226,13 +227,21 @@ function showMenu() {
     else document.querySelector('.navigation-menu').classList.add('opened')
 }
 
-function onDownload(elLink) {
+function onDownload(elLink){
+    console.log('hey');
+    gIsUpload = true
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
     const imgContent = gElCanvas.toDataURL('image/jpeg')
     elLink.href = imgContent
+    gIsUpload = false
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
-
-function onShare() {
+function onShare(){
+    gIsUpload = true
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
     uploadImg()
+    gIsUpload = false
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
 function onSetFont(font) {
