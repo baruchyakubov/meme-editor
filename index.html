@@ -22,7 +22,8 @@
             <h1 data-trans="logo" class="logo  flex align-center">MEME EDITOR</h1>
             <nav class="navigation-menu  flex justify-center align-center">
                 <ul class="clean-list flex">
-                    <li><button onclick="onReturnToGallery(this)" class="Gallery clicked" data-trans="gallery">Gallery</button></li>
+                    <li><button onclick="onReturnToGallery(this)" class="Gallery clicked"
+                            data-trans="gallery">Gallery</button></li>
                     <li><button data-trans="about">About</button></li>
                 </ul>
             </nav>
@@ -30,17 +31,20 @@
         </div>
     </header>
     <section class="gallery grid-container">
-        <div class=".filter grid-container flex-wrap justify-center">
+        <div class=".filter grid-container flex-wrap justify-center align-center">
             <select class="lan" onchange="onSetLang(this.value)">
                 <option value="en">English</option>
                 <option value="he">עברית</option>
             </select>
-            <input list="keywords" data-trans="search" oninput="onSetFilterByTxt(this.value.toLowerCase())" class="search-box" type="search" placeholder="Search">
+            <input list="keywords" data-trans="search" oninput="onSetFilterByTxt(this.value.toLowerCase())"
+                class="search-box" type="search" placeholder="Search">
             <div class="filter-by-category flex-wrap space-around align-center">
                 <button data-trans="funny" value="funny" onclick="onSetFilterByClick(this)" class="funny">FUNNY</button>
                 <button data-trans="cute" value="cute" onclick="onSetFilterByClick(this)" class="cute">CUTE</button>
-                <button data-trans="aqward" value="aqward" onclick="onSetFilterByClick(this)" class="aqward">AQWARD</button>
-                <button data-trans="animal" value="animal" onclick="onSetFilterByClick(this)" class="animal">ANIMALS</button>
+                <button data-trans="aqward" value="aqward" onclick="onSetFilterByClick(this)"
+                    class="aqward">AQWARD</button>
+                <button data-trans="animal" value="animal" onclick="onSetFilterByClick(this)"
+                    class="animal">ANIMALS</button>
                 <button data-trans="bad" value="bad" onclick="onSetFilterByClick(this)" class="bad">BAD</button>
             </div>
         </div>
@@ -53,27 +57,37 @@
         <div class="edit-container grid">
 
             <input class="line" oninput="onSetLineTxt(this.value)" type="text">
-            <div class="change-txt flex-wrap justify-center align-center">
-                <button class="font-btn"><input style="cursor: pointer;" onchange="onSetColor(this.value)" type="color"></button>
-                <button class="font-btn" onclick="onIncreaseFontSize()"><img src="img/increase-font.png" alt=""></button>
-                <button class="font-btn" onclick="onDecreaseFontSize()"><img src="img/decrease-font.png" alt=""></button>
-                <button class="font-btn switch-line" onclick="onSetLineIdx()">
-                    <img src="img/switch-up.png" alt="">
-                    <img src="img/switch-down.png" alt="">
+            <div class="change-txt grid">
+                <button class="font-btn font-color">     
+                        <input style="opacity: 0; position: absolute; cursor:pointer;" oninput="onSetColor(this.value)" type="color"><img  src="img/color.png" alt=""></input>
                 </button>
-                <select class="font-style font-btn" onchange="onSetFont(this.value)" name="" id="">
+                <button class="font-btn increase-font" onclick="onIncreaseFontSize()"><img src="img/increase-font.png" alt=""></button>
+                <button class="font-btn decrease-font" onclick="onDecreaseFontSize()"><img src="img/decrease-font.png" alt=""></button>
+                <button class="font-btn font-color">     
+                    <input style="opacity: 0; position: absolute; cursor:pointer;" oninput="onSetStrokeColor(this.value)" type="color"><img class="stroke-img" src="img/stroke-color.png" alt=""></input>
+            </button>
+               
+                <select class="font-style font-btn flex align-center" onchange="onSetFont(this.value)" name="" id="">
                     <option value="impact">impact</option>
                     <option value="Arial">Arial</option>
                 </select>
-                <img class="font-btn" onclick="onAddLine()" src="img/add-line.png" alt="">
-                <img class="font-btn" onclick="onDeleteLine()" src="img/delete-line.png" alt="">
+                <button class="font-btn add-line"><img onclick="onAddLine()" src="img/add-line.png" alt=""></button>
+                <button class="font-btn delete-line"><img onclick="onDeleteLine()" src="img/delete-line.png"
+                        alt=""></button>
+                        <button class="font-btn switch-line" onclick="onSetLineIdx()">
+                            <img src="img/up-down.png" alt="">
+                        </button>
+                <button onclick="onMoveLineLeft()" class="font-btn left"><img src="img/left.png" alt=""></button>
+                <button onclick="onMoveLineCenter()" class="font-btn center"><img src="img/center.png" alt=""></button>
+                <button onclick="onMoveLineRight()" class="font-btn right"><img src="img/right.png" alt=""></button>
             </div>
             <div class="share-downlowd flex-wrap align-center space-around">
-                <button  class="share-download download"><a data-trans="download" href="#" class="btn" onclick="onDownload(this)" download="my-img.jpg">Download</a></button>
-                <button data-trans="share" class="share-download share" onclick="onShare()">Share to facebook</button>
+                <button class="share-download download"><a data-trans="download" href="#" class="btn"
+                        onclick="onDownload(this)" download="my-img.jpg">Download</a></button>
+                <button data-trans="share" class="share-download share" onclick="onShare()">Share</button>
             </div>
-          
-           
+
+
         </div>
     </section>
     <script src="js/services/storage-service.js"></script>

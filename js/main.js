@@ -1,4 +1,7 @@
 'use strict'
+
+// GLOBAL VARIABLES
+
 let gElCanvas
 let gCtx
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
@@ -7,6 +10,8 @@ let gIsTagged = true
 let gIsCircleDrag = false
 let gStartPos
 let gIsUpload = false
+
+// INIT
 
 function onInit() {
     var keywords = getKeyWordSizes()
@@ -24,6 +29,8 @@ function setKeyWordSizes(keywords) {
     if (keywords[3].size < 33) document.querySelector('.animal').style.fontSize = `${keywords[3].size}px`
     if (keywords[4].size < 33) document.querySelector('.bad').style.fontSize = `${keywords[4].size}px`
 }
+
+// LISTENERS EMPLIYMENT
 
 function addListener() {
     addMouseListeners()
@@ -104,6 +111,8 @@ function onUp() {
     document.querySelector('canvas').style.cursor = 'grab'
 }
 
+// GALLERY SECTION
+
 function renderGallery() {
     var elImages = document.querySelector('.images-container')
     var images = getImg().map(image => {
@@ -120,6 +129,41 @@ function onReturnToGallery(elGallery){
     document.querySelector('.editor').classList.add('closed')
 }
 
+function onChangeKeywordSize(value) {
+    changeKeywordSize(value)
+    setKeyWordSizes(gKeyWords)
+}
+
+function onSetFilterByTxt(value) {
+    setFilterByTxt(value)
+    renderGallery()
+}
+
+function onSetLang(lang) {
+    setLang(lang)
+    setDirection(lang)
+    doTrans()
+}
+
+function onSetFilterByClick(elKeyWord) {
+    var value = elKeyWord.value 
+    onChangeKeywordSize(value)
+    setFilterByClick(value)
+    renderGallery()
+}
+
+function setDirection(lang) {
+    if (lang === 'he'){
+        document.body.classList.add('rtl')
+        document.querySelector('.navigation-menu').classList.add('rtl')
+    } 
+    else{
+        document.body.classList.remove('rtl')
+        document.querySelector('.navigation-menu').classList.remove('rtl')
+    }
+}
+
+// EDITOR SECTION
 
 function showMeme(id) {
     document.querySelector('.Gallery').classList.remove('clicked')
@@ -136,10 +180,15 @@ function showMeme(id) {
     addListener()
 }
 
+
+// RENDER-CANVAS
+
 function setFirstLinesPos() {
+    if(gMeme.lines.length === 0) return
     gMeme.lines[0].posX = gElCanvas.width / 2
-    gMeme.lines[1].posX = gElCanvas.width / 2
     gMeme.lines[0].posY = gElCanvas.height / 9
+    if(gMeme.lines.length === 1) return
+    gMeme.lines[1].posX = gElCanvas.width / 2
     gMeme.lines[1].posY = gElCanvas.height - gElCanvas.height / 10
 }
 
@@ -148,6 +197,7 @@ function resizeCanvas() {
     gElCanvas.width = elContainer.offsetWidth
     gElCanvas.height = elContainer.offsetHeight
 }
+
 function renderMeme(img, lines) {
     const elImg = new Image()
     elImg.src = img
@@ -161,14 +211,15 @@ function renderMeme(img, lines) {
 
 function drawText(line, idx) {
     gCtx.beginPath()
-    gCtx.lineWidth = 2
+    gCtx.lineWidth = 3
     gCtx.font = `${line.size}px ${line.font}` 
     gCtx.textAlign = 'center'
     if (gMeme.selectedLineIdx === idx && gIsTagged === true && !gIsUpload) drawRect(line)
     gCtx.fillStyle = line.color
-    gCtx.strokeStyle = 'black'
+    gCtx.strokeStyle = line.strokeColor
     gCtx.fillText(line.txt, line.posX, line.posY)
     gCtx.strokeText(line.txt, line.posX, line.posY)
+    line.width = gCtx.measureText(line.txt).width
 }
 
 function drawRect(line) {
@@ -192,6 +243,12 @@ function drawArc(x, y) {
     gCtx.fill()
 }
 
+// EDIT EMPLIMENT
+
+function onSetStrokeColor(color){
+    setStrokeColor(color)
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
 
 function onSetLineTxt(text) {
     setLineTxt(text)
@@ -221,27 +278,29 @@ function onSetLineIdx() {
     document.querySelector('.line').value = gMeme.lines[gMeme.selectedLineIdx].txt
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
+function onMoveLineLeft(){
+    var lineWidth = gMeme.lines[gMeme.selectedLineIdx].width
+    var posX = lineWidth/2
+    moveLine(posX)
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+
+function onMoveLineCenter(){
+    var posX = gElCanvas.width / 2 
+    moveLine(posX)
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
+
+function onMoveLineRight(){
+    var lineWidth = gMeme.lines[gMeme.selectedLineIdx].width
+    var posX = gElCanvas.width - lineWidth/2
+    moveLine(posX)
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+}
 
 function showMenu() {
     if (document.querySelector('.navigation-menu').classList.contains('opened')) document.querySelector('.navigation-menu').classList.remove('opened')
     else document.querySelector('.navigation-menu').classList.add('opened')
-}
-
-function onDownload(elLink){
-    console.log('hey');
-    gIsUpload = true
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = imgContent
-    gIsUpload = false
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-}
-function onShare(){
-    gIsUpload = true
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-    uploadImg()
-    gIsUpload = false
-    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
 function onSetFont(font) {
@@ -259,39 +318,29 @@ function onDeleteLine() {
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onSetFilterByClick(elKeyWord) {
-    var value = elKeyWord.value 
-    onChangeKeywordSize(value)
-    setFilterByClick(value)
-    renderGallery()
+// SHARE-DOWNLOAD EMPLIMENT
+
+function onDownload(elLink){
+    gIsUpload = true
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+    gIsUpload = false
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onChangeKeywordSize(value) {
-    changeKeywordSize(value)
-    setKeyWordSizes(gKeyWords)
+function onShare(){
+    gIsUpload = true
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    uploadImg()
+    gIsUpload = false
+    renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
 }
 
-function onSetFilterByTxt(value) {
-    setFilterByTxt(value)
-    renderGallery()
-}
 
-function onSetLang(lang) {
-    setLang(lang)
-    setDirection(lang)
-    doTrans()
-}
 
-function setDirection(lang) {
-    if (lang === 'he'){
-        document.body.classList.add('rtl')
-        document.querySelector('.navigation-menu').classList.add('rtl')
-    } 
-    else{
-        document.body.classList.remove('rtl')
-        document.querySelector('.navigation-menu').classList.remove('rtl')
-    }
-}
+
+
 
 
 

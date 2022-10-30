@@ -21,8 +21,8 @@ const gTrans = {
         he: 'הורד'
     },
     'share': {
-        en: 'Share on facebook',
-        he: 'שתף בפייסבוק'
+        en: 'Share',
+        he: 'שתף'
     },
     'funny': {
         en: 'FUNNY',

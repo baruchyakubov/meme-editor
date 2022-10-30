@@ -14,23 +14,25 @@ var gMeme = {
         {
             txt: 'LOL',
             size: 40,
-            align: 'left',
             color: 'white',
             posY: 0,
             posX: 0,
             font: 'impact',
-            posArc:{}
+            posArc:{},
+            width: 0,
+            strokeColor: 'black'
         },
 
         {
             txt: 'hello there!',
             size: 40,
-            align: 'left',
             color: 'white',
             posY: 0,
             posX: 0,
             font: 'impact',
-            posArc:{}
+            posArc:{},
+            width: 0,
+            strokeColor: 'black'
         }
     ]
 }
@@ -145,6 +147,10 @@ function deleteLine() {
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
 }
 
+function setStrokeColor(color){
+    gMeme.lines[gMeme.selectedLineIdx].strokeColor = color 
+}
+
 function createLine() {
     return {
         txt: 'LOL',
@@ -153,7 +159,10 @@ function createLine() {
         color: 'white',
         posY: gElCanvas.height / 2,
         posX: gElCanvas.width / 2,
-        font: 'impact'
+        font: 'impact',
+        posArc:{},
+        width: 0,
+        strokeColor: 'black'
     }
 }
 
@@ -184,6 +193,10 @@ function setFilterByTxt(value) {
     })
 }
 
+function moveLine(diff){
+    gMeme.lines[gMeme.selectedLineIdx].posX = diff
+}
+
 function setgMeme(){
     gMeme = gMeme = {
         selectedImgId: 2,
@@ -197,7 +210,9 @@ function setgMeme(){
                 posY: 0,
                 posX: 0,
                 font: 'impact',
-                posArc:{}
+                posArc:{},
+                width:0,
+                strokeColor: 'black'
             },
     
             {
@@ -208,7 +223,9 @@ function setgMeme(){
                 posY: 0,
                 posX: 0,
                 font: 'impact',
-                posArc:{}
+                posArc:{},
+                width:0,
+                strokeColor: 'black'
             }
         ]
     }
