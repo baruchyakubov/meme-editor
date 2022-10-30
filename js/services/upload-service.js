@@ -5,7 +5,6 @@ function uploadImg() {
   const imgDataUrl = gElCanvas.toDataURL("image/jpeg")
 
   function onSuccess(uploadedImgUrl) {
-    const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}`)
   }
 

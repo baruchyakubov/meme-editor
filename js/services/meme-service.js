@@ -1,4 +1,7 @@
 'use strict'
+
+// GLOBAL VARIABLES
+
 var gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['funny', 'aqward'] }, { id: 2, url: 'img/2.jpg', keywords: ['cute', 'animal'] }, { id: 3, url: 'img/3.jpg', keywords: ['cute', 'animal'] },
 { id: 4, url: 'img/4.jpg', keywords: ['cute', 'animal'] }, { id: 5, url: 'img/5.jpg', keywords: ['cute', 'funny'] }, { id: 6, url: 'img/6.jpg', keywords: ['funny', 'bad'] },
 { id: 7, url: 'img/7.jpg', keywords: ['funny', 'cute'] }, { id: 8, url: 'img/8.jpg', keywords: ['funny', 'bad'] }, { id: 9, url: 'img/9.jpg', keywords: ['funny', 'cute'] }
@@ -40,26 +43,7 @@ var gFilterBy = gImgs
 var gMemeImg
 var gIsArcClicked = false
 
-function getLang(){
-    var lang = loadFromStorage('language')
-    if(!lang){
-        lang = 'en'
-        saveToStorage('language' , lang)
-    }
-    gCurrLang = lang
-    return lang
-}
-
-function getKeyWordSizes() {
-    var keyWords = loadFromStorage('keywords')
-    if (!keyWords) {
-        keyWords = [{ value: 'funny', size: 18 }, { value: 'cute', size: 18 }, { value: 'aqward', size: 18 }, { value: 'animal', size: 18 }, { value: 'bad', size: 18 }]
-        console.log(gKeyWords);
-        saveToStorage('keywords', keyWords)
-    }
-    gKeyWords = keyWords
-    return gKeyWords
-}
+// EDIT EMPLIMENT
 
 function getMeme(id) {
     var gMemeImg = gImgs.find(image => {
@@ -80,8 +64,6 @@ function clearCanvas() {
 function getImg() {
     return gFilterBy
 }
-
-
 
 function setColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
@@ -104,35 +86,8 @@ function decreaseFontSize() {
 }
 
 function setLineIdx() {
-    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+    if (gMeme.selectedLineIdx >= gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
     else gMeme.selectedLineIdx++
-}
-
-function isLineClicked(clickedPos) {
-    let isClicked = false
-    gMeme.lines.forEach((line, idx) => {
-        var lineWidth = gCtx.measureText(line.txt).width
-        if (clickedPos.x > line.posX - lineWidth / 2 && clickedPos.x < line.posX + lineWidth / 2
-            && clickedPos.y < line.posY && clickedPos.y > line.posY - line.size) {
-            if (idx !== gMeme.selectedLineIdx) {
-                gMeme.selectedLineIdx = idx
-                renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-            }
-            isClicked = true
-        } else {
-            const distance = Math.sqrt((line.posArc.x - clickedPos.x) ** 2 + (line.posArc.y- clickedPos.y) ** 2)
-            if (distance <= 5 && idx === gMeme.selectedLineIdx){
-                gIsArcClicked = true
-                isClicked = true
-            }
-        }
-
-    })
-    if (!isClicked) {
-        gIsTagged = false
-        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-    }
-    return isClicked
 }
 
 function setLineFont(font) {
@@ -166,6 +121,36 @@ function createLine() {
     }
 }
 
+function moveLine(diff){
+    gMeme.lines[gMeme.selectedLineIdx].posX = diff
+}
+
+// i18n
+
+function getLang(){
+    var lang = loadFromStorage('language')
+    if(!lang){
+        lang = 'en'
+        saveToStorage('language' , lang)
+    }
+    gCurrLang = lang
+    return lang
+}
+
+// FILTER
+
+function getKeyWordSizes() {
+    var keyWords = loadFromStorage('keywords')
+    if (!keyWords) {
+        keyWords = [{ value: 'funny', size: 18 }, { value: 'cute', size: 18 }, { value: 'aqward', size: 18 }, { value: 'animal', size: 18 }, { value: 'bad', size: 18 }]
+        console.log(gKeyWords);
+        saveToStorage('keywords', keyWords)
+    }
+    gKeyWords = keyWords
+    return gKeyWords
+}
+
+
 function setFilterByClick(value) {
     gFilterBy = []
     gImgs.forEach(image => {
@@ -193,9 +178,7 @@ function setFilterByTxt(value) {
     })
 }
 
-function moveLine(diff){
-    gMeme.lines[gMeme.selectedLineIdx].posX = diff
-}
+// RESET MEME
 
 function setgMeme(){
     gMeme = gMeme = {
@@ -229,4 +212,33 @@ function setgMeme(){
             }
         ]
     }
+}
+
+// LISTENERS EMPLIYMENT
+ 
+function isLineClicked(clickedPos) {
+    let isClicked = false
+    gMeme.lines.forEach((line, idx) => {
+        var lineWidth = gCtx.measureText(line.txt).width
+        if (clickedPos.x > line.posX - lineWidth / 2 && clickedPos.x < line.posX + lineWidth / 2
+            && clickedPos.y < line.posY && clickedPos.y > line.posY - line.size) {
+            if (idx !== gMeme.selectedLineIdx) {
+                gMeme.selectedLineIdx = idx
+                renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+            }
+            isClicked = true
+        } else {
+            const distance = Math.sqrt((line.posArc.x - clickedPos.x) ** 2 + (line.posArc.y- clickedPos.y) ** 2)
+            if (distance <= 5 && idx === gMeme.selectedLineIdx){
+                gIsArcClicked = true
+                isClicked = true
+            }
+        }
+
+    })
+    if (!isClicked) {
+        gIsTagged = false
+        renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
+    }
+    return isClicked
 }

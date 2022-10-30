@@ -22,14 +22,6 @@ function onInit() {
     renderGallery()
 }
 
-function setKeyWordSizes(keywords) {
-    if (keywords[0].size < 33) document.querySelector('.funny').style.fontSize = `${keywords[0].size}px`
-    if (keywords[1].size < 33) document.querySelector('.cute').style.fontSize = `${keywords[1].size}px`
-    if (keywords[2].size < 33) document.querySelector('.aqward').style.fontSize = `${keywords[2].size}px`
-    if (keywords[3].size < 33) document.querySelector('.animal').style.fontSize = `${keywords[3].size}px`
-    if (keywords[4].size < 33) document.querySelector('.bad').style.fontSize = `${keywords[4].size}px`
-}
-
 // LISTENERS EMPLIYMENT
 
 function addListener() {
@@ -129,6 +121,14 @@ function onReturnToGallery(elGallery){
     document.querySelector('.editor').classList.add('closed')
 }
 
+function setKeyWordSizes(keywords) {
+    if (keywords[0].size < 33) document.querySelector('.funny').style.fontSize = `${keywords[0].size}px`
+    if (keywords[1].size < 33) document.querySelector('.cute').style.fontSize = `${keywords[1].size}px`
+    if (keywords[2].size < 33) document.querySelector('.aqward').style.fontSize = `${keywords[2].size}px`
+    if (keywords[3].size < 33) document.querySelector('.animal').style.fontSize = `${keywords[3].size}px`
+    if (keywords[4].size < 33) document.querySelector('.bad').style.fontSize = `${keywords[4].size}px`
+}
+
 function onChangeKeywordSize(value) {
     changeKeywordSize(value)
     setKeyWordSizes(gKeyWords)
@@ -161,6 +161,11 @@ function setDirection(lang) {
         document.body.classList.remove('rtl')
         document.querySelector('.navigation-menu').classList.remove('rtl')
     }
+}
+
+function showMenu() {
+    if (document.querySelector('.navigation-menu').classList.contains('opened')) document.querySelector('.navigation-menu').classList.remove('opened')
+    else document.querySelector('.navigation-menu').classList.add('opened')
 }
 
 // EDITOR SECTION
@@ -296,11 +301,6 @@ function onMoveLineRight(){
     var posX = gElCanvas.width - lineWidth/2
     moveLine(posX)
     renderMeme(getMeme(gMeme.selectedImgId).img, getMeme(gMeme.selectedImgId).lines)
-}
-
-function showMenu() {
-    if (document.querySelector('.navigation-menu').classList.contains('opened')) document.querySelector('.navigation-menu').classList.remove('opened')
-    else document.querySelector('.navigation-menu').classList.add('opened')
 }
 
 function onSetFont(font) {
