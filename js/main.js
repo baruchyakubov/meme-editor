@@ -216,7 +216,7 @@ function renderMeme(img, lines) {
 
 function drawText(line, idx) {
     gCtx.beginPath()
-    gCtx.lineWidth = 3
+    gCtx.lineWidth = 2
     gCtx.font = `${line.size}px ${line.font}` 
     gCtx.textAlign = 'center'
     if (gMeme.selectedLineIdx === idx && gIsTagged === true && !gIsUpload) drawRect(line)
