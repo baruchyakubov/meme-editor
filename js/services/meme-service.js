@@ -183,3 +183,33 @@ function setFilterByTxt(value) {
         })
     })
 }
+
+function setgMeme(){
+    gMeme = gMeme = {
+        selectedImgId: 2,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: 'LOL',
+                size: 40,
+                align: 'left',
+                color: 'white',
+                posY: 0,
+                posX: 0,
+                font: 'impact',
+                posArc:{}
+            },
+    
+            {
+                txt: 'hello there!',
+                size: 40,
+                align: 'left',
+                color: 'white',
+                posY: 0,
+                posX: 0,
+                font: 'impact',
+                posArc:{}
+            }
+        ]
+    }
+}

@@ -113,6 +113,7 @@ function renderGallery() {
 
 
 function onReturnToGallery(elGallery){
+    setgMeme()
     elGallery.classList.add('clicked')
     document.querySelector('.gallery').classList.remove('closed')
     document.querySelector('.editor').classList.add('closed')
