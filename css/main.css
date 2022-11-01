@@ -61,7 +61,7 @@ body.rtl  {
 .editor , .edit-container{
     direction: ltr !important;
 }
-html , body{
+html{
     overflow-x: hidden;
 }
 body {
