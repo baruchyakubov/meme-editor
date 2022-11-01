@@ -62,7 +62,6 @@ body.rtl  {
     direction: ltr !important;
 }
 html , body{
-    position: relative;
     overflow-x: hidden;
 }
 body {
