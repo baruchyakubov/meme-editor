@@ -61,11 +61,12 @@ body.rtl  {
 .editor , .edit-container{
     direction: ltr !important;
 }
-
+html , body{
+    overflow-x: hidden;
+}
 body {
     background-color: var(--clr1);
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 .font-btn {
